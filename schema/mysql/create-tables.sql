@@ -1,0 +1,11 @@
+SET default_storage_engine=myisam;
+CREATE TABLE IF NOT EXISTS empresa (id char(8), razao_social varchar(150), codigo_natureza_juridica char(4), qualificacao_responsavel char(2), capital_social decimal(12,2), porte tinyint(2), PRIMARY KEY (id));
+CREATE TABLE IF NOT EXISTS socio (id_empresa char(8), tipo_pessoa tinyint(1), nome varchar(150), cpf_cnpj varchar(14), codigo_qualificacao char(2), data date, cpf_representante_legal varchar(11), nome_representante_legal varchar(150), codigo_qualificacao_representante_legal char(2), INDEX(id_empresa));
+CREATE TABLE IF NOT EXISTS estabelecimento (id_empresa char(8), subsidiaria char(4), codigo_verificador char(2), cnpj char(14), matriz_filial tinyint(1), fantasia varchar(55), situacao_cadastral char(2), data_situacao_cadastral date, motivo_situacao_cadastral char(2), data_abertura date, cnae_principal char(7), cnae_secundaria char(7), endereco_tipo_logradouro varchar(20), endereco_logradouro varchar(60), endereco_numero varchar(6), endereco_complemento varchar(156), endereco_bairro varchar(50), endereco_cep char(8), endereco_uf char(2), endereco_codigo_municipio char(4), telefone1_ddd char(2), telefone1_numero char(8), telefone2_ddd char(2), telefone2_numero char(8), fax_ddd char(2), fax_numero char(8), email varchar(115), INDEX(id_empresa), INDEX(cnpj));
+CREATE TABLE IF NOT EXISTS optante_simples (id_empresa char(8), simples char(1), simples_inicio date, simples_fim date, simei char(1), simei_inicio date, simei_fim date, INDEX(id_empresa));
+CREATE TABLE IF NOT EXISTS cnae (cnae char(7), descricao varchar(150), PRIMARY KEY (cnae));
+CREATE TABLE IF NOT EXISTS municipio (codigo char(4), nome varchar(150), PRIMARY KEY (codigo));
+CREATE TABLE IF NOT EXISTS natureza_juridica (codigo char(4), descricao varchar(150), PRIMARY KEY (codigo));
+CREATE TABLE IF NOT EXISTS qualificacao_socio (codigo char(2), descricao varchar(150), PRIMARY KEY (codigo));
+CREATE TABLE IF NOT EXISTS pais (codigo char(3), descricao varchar(60), PRIMARY KEY (codigo));
+CREATE TABLE IF NOT EXISTS motivo_situacao_cadastral (codigo char(2), descricao varchar(100), PRIMARY KEY (codigo));
