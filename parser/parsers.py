@@ -32,8 +32,8 @@ class CnpjCsvParser(Parser):
             'razao_social': row[1],
             'codigo_natureza_juridica': row[2],
             'qualificacao_responsavel': row[3],
-            'capital_social': (float)(row[4].replace(',', '.')),
-            'porte': row[5]
+            'capital_social': parse_float(row[4]),
+            'porte': parse_int(row[5])
         } if row else None
 
 class SocioCsvParser(Parser):
@@ -44,7 +44,7 @@ class SocioCsvParser(Parser):
         row = self.read_line()
         return {
             'id_empresa': row[0],
-            'tipo_pessoa': row[1],
+            'tipo_pessoa': parse_int(row[1]),
             'nome': row[2],
             'cpf_cnpj': row[3],
             'codigo_qualificacao': row[4],
@@ -65,7 +65,7 @@ class EstabeleCsvParser(Parser):
             'subsidiaria': row[1],
             'codigo_verificador': row[2],
             'cnpj': row[0] + row[1] + row[2],
-            'matriz_filial': row[3],
+            'matriz_filial': parse_int(row[3]),
             'fantasia': row[4],
             'situacao_cadastral': row[5],
             'data_situacao_cadastral': parse_date(row[6]),

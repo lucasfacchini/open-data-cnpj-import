@@ -13,7 +13,16 @@ class TestParser(unittest.TestCase):
             'codigo_natureza_juridica': '2135',
             'qualificacao_responsavel': '50',
             'capital_social': 1000.00,
-            'porte': '05'
+            'porte': 5
+        }, cnpj_parser.parse_line())
+
+        self.assertEqual({
+            'id': '11111111',
+            'razao_social': 'LOREM IPSUM',
+            'codigo_natureza_juridica': '2135',
+            'qualificacao_responsavel': '50',
+            'capital_social': None,
+            'porte': None
         }, cnpj_parser.parse_line())
 
     def test_parse_socio(self):
@@ -21,7 +30,7 @@ class TestParser(unittest.TestCase):
 
         self.assertEqual({
             'id_empresa': '00000000',
-            'tipo_pessoa': '2',
+            'tipo_pessoa': 2,
             'nome': 'JOHN DOE',
             'cpf_cnpj': '***111111**',
             'codigo_qualificacao': '30',
@@ -39,7 +48,7 @@ class TestParser(unittest.TestCase):
             'subsidiaria': '0001',
             'codigo_verificador': '41',
             'cnpj': '00000000000141',
-            'matriz_filial': '1',
+            'matriz_filial': 1,
             'fantasia': 'FANTASIA',
             'situacao_cadastral': '2',
             'data_situacao_cadastral': '2005-11-03',

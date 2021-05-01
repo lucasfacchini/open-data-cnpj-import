@@ -6,4 +6,16 @@ def parse_date(unformatted_data):
             unformatted_data[6:8]
         ))
     else:
-        return ''
+        return None
+
+def parse_int(text):
+    if text.isdigit():
+        return int(text)
+
+    return None
+
+def parse_float(text):
+    try:
+        return float(text.replace(',', '.'))
+    except ValueError:
+        return None

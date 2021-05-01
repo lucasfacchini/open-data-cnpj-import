@@ -30,12 +30,12 @@ class MysqlImport(SqlImport):
             if line:
                 lines.append(tuple(line.values()))
                 keys = line.keys()
-                pbar.update(1)
                 count += 1
 
             if len(lines) >= self.BATCH_SIZE or not line:
                 try:
                     self.cursor.executemany(self.build_insert(parser, keys), lines)
+                    pbar.update(len(lines))
                 except IntegrityError as e:
                     self.log.error(str(e))
 
