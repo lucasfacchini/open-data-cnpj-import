@@ -19,3 +19,11 @@ def parse_float(text):
         return float(text.replace(',', '.'))
     except ValueError:
         return None
+
+def parse_cnae(cnae_text_list):
+    if len(cnae_text_list) > 0:
+        cnaes = cnae_text_list.split(',')
+
+        return cnaes[0]
+
+    return None
