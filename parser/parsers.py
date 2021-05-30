@@ -1,5 +1,6 @@
 from parser.utils import *
 import glob
+import abc
 from parser.csv_reader import CsvReader
 
 class Parser:
@@ -20,10 +21,30 @@ class Parser:
     def get_name(self):
         return self.reader.filename
 
+    @abc.abstractmethod
+    def parse_line(self):
+        pass
+
+    def parse_bulk(self, size):
+        count = 0
+        lines = []
+        while count < size:
+            line = self.parse_line()
+            if line is None:
+                break
+            lines.append(line)
+            count += 1
+
+        return lines
+
 
 class CnpjCsvParser(Parser):
     TABLE = 'empresa'
     FILE_PATTERN = '*EMPRECSV'
+
+    def __init__(self, reader):
+        Parser.__init__(self, reader)
+        self.parsed_ids = set()
 
     def parse_line(self):
         row = self.read_line()
@@ -35,6 +56,24 @@ class CnpjCsvParser(Parser):
             'capital_social': parse_float(row[4]),
             'porte': parse_int(row[5])
         } if row else None
+
+    def parse_bulk(self, size):
+        count = 0
+        lines = []
+        while count < size:
+            line = self.parse_line()
+            if line is None:
+                break
+
+            if line['id'] in self.parsed_ids:
+                continue
+
+            lines.append(line)
+            self.parsed_ids.add(line['id'])
+            count += 1
+
+        return lines
+
 
 class SocioCsvParser(Parser):
     TABLE = 'socio'

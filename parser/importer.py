@@ -1,5 +1,5 @@
 from mysql.connector.connection import MySQLConnection
-from mysql.connector.errors import IntegrityError
+from mysql.connector.errors import IntegrityError, DataError
 from tqdm import tqdm
 
 class SqlImport():
@@ -12,7 +12,7 @@ class SqlImport():
 
 
 class MysqlImport(SqlImport):
-    BATCH_SIZE = 1000
+    BATCH_SIZE = 5000
 
     def __init__(self, host, port, user, password, db, log):
         self.context = MySQLConnection(host=host, port=port, user=user, password=password, database=db)
@@ -26,23 +26,20 @@ class MysqlImport(SqlImport):
         count = 0
 
         while limit == 0 or count <= limit:
-            line = parser.parse_line()
-            if line:
-                lines.append(tuple(line.values()))
-                keys = line.keys()
-                count += 1
-
-            if len(lines) >= self.BATCH_SIZE or not line:
-                try:
-                    self.cursor.executemany(self.build_insert(parser, keys), lines)
-                    pbar.update(len(lines))
-                except IntegrityError as e:
-                    self.log.error(str(e))
-
-                lines = []
-
-            if not line:
+            lines = parser.parse_bulk(self.BATCH_SIZE)
+            count += len(lines)
+            if len(lines) == 0:
                 break
+
+            try:
+                lines_in_tuples = list(map(lambda line: tuple(line.values()), lines))
+                keys = lines[0].keys()
+                self.cursor.executemany(self.build_insert(parser, keys), lines_in_tuples)
+                pbar.update(len(lines))
+            except (IntegrityError, DataError) as e:
+                self.log.error(str(e))
+
+            lines = []
 
         self.context.commit()
 

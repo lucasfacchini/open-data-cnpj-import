@@ -25,6 +25,15 @@ class TestParser(unittest.TestCase):
             'porte': None
         }, cnpj_parser.parse_line())
 
+    def test_parse_cnpj_bulk(self):
+        cnpj_parser = CnpjCsvParser(CsvReader('tests/test-files/EMPRECSV'))
+
+        self.assertEqual(1, len(cnpj_parser.parse_bulk(2)))
+
+        cnpj_parser = CnpjCsvParser(CsvReader('tests/test-files/EMPRECSVBULK'))
+        self.assertEqual(2, len(cnpj_parser.parse_bulk(2)))
+        self.assertEqual(0, len(cnpj_parser.parse_bulk(2)))
+
     def test_parse_socio(self):
         socio_parser = SocioCsvParser(CsvReader('tests/test-files/SOCIOCSV'))
 
