@@ -7,6 +7,12 @@ def parse_date(unformatted_data):
         ))
     else:
         return None
+    
+def parse_valid_date_or_none(unformatted_data):
+    if int(unformatted_data) > 0:
+        return parse_date(unformatted_data)
+    else:
+        return None
 
 def parse_int(text):
     if text.isdigit():

@@ -138,11 +138,11 @@ class OptanteSimplesCsvParser(Parser):
         return {
             'id_empresa': row[0],
             'simples': row[1],
-            'simples_inicio': parse_date(row[2]),
-            'simples_fim': parse_date(row[3]),
+            'simples_inicio': parse_valid_date_or_none(row[2]),
+            'simples_fim': parse_valid_date_or_none(row[3]),
             'simei': row[4],
-            'simei_inicio': parse_date(row[5]),
-            'simei_fim': parse_date(row[6])
+            'simei_inicio': parse_valid_date_or_none(row[5]),
+            'simei_fim': parse_valid_date_or_none(row[6])
         } if row else None
 
 class CnaeCsvParser(Parser):

@@ -95,6 +95,16 @@ class TestParser(unittest.TestCase):
             'simei_fim': '2018-02-01'
         }, optante_simples_parser.parse_line())
 
+        self.assertEqual({
+            'id_empresa': '00000000',
+            'simples': 'N',
+            'simples_inicio': None,
+            'simples_fim': None,
+            'simei': 'N',
+            'simei_inicio': None,
+            'simei_fim': None
+        }, optante_simples_parser.parse_line())
+
     def test_parse_cnae(self):
         cnae_parser = CnaeCsvParser(CsvReader('tests/test-files/CNAECSV'))
 

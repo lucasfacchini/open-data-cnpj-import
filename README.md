@@ -15,10 +15,8 @@ sh download.sh
 ## Import
 You can import the data in your existing MySQL server, but you can also start a new one using docker:
 ```
-docker run --name mysql-cnpj -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=cnpj -d mysql
+docker run --name mysql-cnpj -p 3306:3306 -h localhost -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=cnpj -d mysql
 ```
-If your 3306 port is occupied, append this in the end of the above command: `-p 3306:3307`.
-
 After starting your MySQL server, run the following, replacing with your credentials:
 ```
 python mysql_import.py <host> <port> <user> <password> <database>
