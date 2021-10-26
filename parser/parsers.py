@@ -7,13 +7,10 @@ class Parser:
     def __init__(self, reader):
         self.reader = reader
         self.size = self.reader.count_lines()
-        self.generator = self.reader.read()
+        self.reader.open()
 
     def read_line(self):
-        try:
-            return next(self.generator)
-        except StopIteration:
-            return None
+        return self.reader.read()
 
     def get_size(self):
         return self.size
@@ -36,6 +33,9 @@ class Parser:
             count += 1
 
         return lines
+
+    def close(self):
+        self.reader.close()
 
 
 class CnpjCsvParser(Parser):

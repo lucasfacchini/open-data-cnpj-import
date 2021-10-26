@@ -24,15 +24,17 @@ class TestParser(unittest.TestCase):
             'capital_social': None,
             'porte': None
         }, cnpj_parser.parse_line())
+        cnpj_parser.close()
 
     def test_parse_cnpj_bulk(self):
         cnpj_parser = CnpjCsvParser(CsvReader('tests/test-files/EMPRECSV'))
-
         self.assertEqual(1, len(cnpj_parser.parse_bulk(2)))
+        cnpj_parser.close()
 
         cnpj_parser = CnpjCsvParser(CsvReader('tests/test-files/EMPRECSVBULK'))
         self.assertEqual(2, len(cnpj_parser.parse_bulk(2)))
         self.assertEqual(0, len(cnpj_parser.parse_bulk(2)))
+        cnpj_parser.close()
 
     def test_parse_socio(self):
         socio_parser = SocioCsvParser(CsvReader('tests/test-files/SOCIOCSV'))
@@ -48,6 +50,7 @@ class TestParser(unittest.TestCase):
             'nome_representante_legal': 'JOHN DOE 2',
             'codigo_qualificacao_representante_legal': '15',
         }, socio_parser.parse_line())
+        socio_parser.close()
 
     def test_parse_estabele(self):
         estabele_parser = EstabeleCsvParser(CsvReader('tests/test-files/ESTABELE'))
@@ -81,6 +84,7 @@ class TestParser(unittest.TestCase):
             'fax_numero': '11111111',
             'email': 'test@hotmail.com'
         }, estabele_parser.parse_line())
+        estabele_parser.close()
 
     def test_parse_optante_simples(self):
         optante_simples_parser = OptanteSimplesCsvParser(CsvReader('tests/test-files/SIMPLES.CSV'))
@@ -104,6 +108,7 @@ class TestParser(unittest.TestCase):
             'simei_inicio': None,
             'simei_fim': None
         }, optante_simples_parser.parse_line())
+        optante_simples_parser.close()
 
     def test_parse_cnae(self):
         cnae_parser = CnaeCsvParser(CsvReader('tests/test-files/CNAECSV'))
@@ -112,6 +117,8 @@ class TestParser(unittest.TestCase):
             'cnae': '0111301',
             'descricao': 'Cultivo de arroz'
         }, cnae_parser.parse_line())
+        cnae_parser.close()
+
 
     def test_parse_minicipio(self):
         municipio_parser = MunicipioCsvParser(CsvReader('tests/test-files/MUNICCSV'))
@@ -120,6 +127,7 @@ class TestParser(unittest.TestCase):
             'codigo': '0001',
             'nome': 'GUAJARA-MIRIM'
         }, municipio_parser.parse_line())
+        municipio_parser.close()
 
     def test_parse_natureza_juridica(self):
         natureza_juridica_parser = NaturezaJuridicaCsvParser(CsvReader('tests/test-files/NATJUCSV'))
@@ -128,6 +136,8 @@ class TestParser(unittest.TestCase):
             'codigo': '0000',
             'descricao': 'NATUREZA JURIDICA NAO INFORMADA'
         }, natureza_juridica_parser.parse_line())
+        natureza_juridica_parser.close()
+
 
     def test_parse_qual_socio(self):
         qual_socio_parser = QualSocioCsvParser(CsvReader('tests/test-files/QUALSCSV'))
@@ -136,6 +146,8 @@ class TestParser(unittest.TestCase):
             'codigo': '00',
             'descricao': 'NAO INFORMADA'
         }, qual_socio_parser.parse_line())
+        qual_socio_parser.close()
+
 
     def test_parse_pais(self):
         pais_parser = PaisCsvParser(CsvReader('tests/test-files/PAISCSV'))
@@ -144,3 +156,4 @@ class TestParser(unittest.TestCase):
             'codigo': '000',
             'descricao': 'COLIS POSTAUX'
         }, pais_parser.parse_line())
+        pais_parser.close()

@@ -8,18 +8,22 @@ class CsvReader:
     def __init__(self, filename, log=None):
         self.filename = filename
         self.log = log
+        self._file = None
+
+    def open(self):
+        self._file = open(self.filename, 'r', encoding=ENCODING)
+
+        return self._file
 
     def read(self):
-        file = open(self.filename, 'r', encoding=ENCODING)
-        with file as csvfile:
-            for line in csvfile:
-                reader = csv.reader([line.replace('\0','')], delimiter=DELIMITER)
-                for row in reader:
-                    yield row
+        for line in self._file:
+            reader = csv.reader([line.replace('\0','')], delimiter=DELIMITER)
+            for row in reader:
+                return row
 
     def count_lines(self, chunk_size=65536):
         count = 0
-        with open(self.filename, 'r', encoding=ENCODING) as csvfile:
+        with self.open() as csvfile:
             while True:
                 chunk = csvfile.read(chunk_size)
                 if not chunk:
@@ -27,3 +31,6 @@ class CsvReader:
                 count += chunk.count('\n')
 
         return count
+
+    def close(self):
+        self._file.close()
