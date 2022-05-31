@@ -1,0 +1,10 @@
+update empresa set qualificacao_responsavel = '00' where qualificacao_responsavel = '0'; 
+update empresa set qualificacao_responsavel = '01' where qualificacao_responsavel = '1'; 
+update empresa set qualificacao_responsavel = '02' where qualificacao_responsavel = '2'; 
+update empresa set qualificacao_responsavel = '03' where qualificacao_responsavel = '3'; 
+update empresa set qualificacao_responsavel = '04' where qualificacao_responsavel = '4'; 
+update empresa set qualificacao_responsavel = '05' where qualificacao_responsavel = '5'; 
+update empresa set qualificacao_responsavel = '06' where qualificacao_responsavel = '6'; 
+update empresa set qualificacao_responsavel = '07' where qualificacao_responsavel = '7'; 
+update empresa set qualificacao_responsavel = '08' where qualificacao_responsavel = '8'; 
+update empresa set qualificacao_responsavel = '09' where qualificacao_responsavel = '9';

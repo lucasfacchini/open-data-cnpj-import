@@ -54,4 +54,7 @@ for parser in parsers:
     sql.run(parser)
     count += 1
 
+
+sql.run_script('schema/mysql/update-correct-data.sql')
+
 sql.close()
