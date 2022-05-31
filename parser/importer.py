@@ -8,7 +8,8 @@ class SqlImport():
         sqlKeys = ','.join(keys)
         sqlValues = ','.join(['%s'] * len(keys))
 
-        return 'INSERT INTO ' + parser.TABLE + '(' + sqlKeys + ') VALUES (' + sqlValues + ')'
+        #return 'INSERT INTO ' + parser.TABLE + '(' + sqlKeys + ') VALUES (' + sqlValues + ')'
+        return 'REPLACE INTO ' + parser.TABLE + '(' + sqlKeys + ') VALUES (' + sqlValues + ')'
 
 
 class MysqlImport(SqlImport):

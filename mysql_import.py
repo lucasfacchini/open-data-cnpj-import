@@ -33,7 +33,7 @@ args = parse_args()
 log = Log()
 sql = MysqlImport(args['host'], args['port'], args['user'], args['password'], args['database'], log)
 log.info('Creating schema')
-sql.run_script('schema/mysql/drop-tables.sql')
+#sql.run_script('schema/mysql/drop-tables.sql')
 sql.run_script('schema/mysql/create-tables.sql')
 
 log.info('Analyzing files')
@@ -45,8 +45,8 @@ else:
     log.info('No files found.')
 
 log.info('Truncating tables')
-for parser in parsers:
-    sql.truncate_table(parser.TABLE)
+#for parser in parsers:
+#    sql.truncate_table(parser.TABLE)
 
 count = 0
 for parser in parsers:

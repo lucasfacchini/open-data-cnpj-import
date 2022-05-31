@@ -1,2 +1,4 @@
 mysql-connector-python
 tqdm
+lxml
+bs4
