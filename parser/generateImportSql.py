@@ -56,7 +56,7 @@ class EstabeleCsvParser(Parser):
     TABLE = 'estabelecimento2'
     FILE_PATTERN = '*ESTABELE'
     FIELDS = 'id_empresa, subsidiaria, codigo_verificador,matriz_filial, fantasia, situacao_cadastral, data_situacao_cadastral, motivo_situacao_cadastral,@dummy,@dummy1, data_abertura,@cnae, @cnae2, endereco_tipo_logradouro, endereco_logradouro, endereco_numero,endereco_complemento,endereco_bairro,endereco_cep,endereco_uf,endereco_codigo_municipio,@telefone1_ddd,telefone1_numero,@telefone2_ddd,telefone2_numero, @fax_ddd,fax_numero,email'
-    EXTRA = " set cnae_principal=substring_index(@cnae,',',1),cnae_secundaria=substring_index(@cnae2,',',1),telefone1_ddd = substring(@telefone1_ddd,-2),telefone2_ddd=substring(@telefone2_ddd,-2),fax_ddd=substring(@fax_ddd,-2)"
+    EXTRA = " set cnae_principal=substring_index(@cnae,',',1),cnae_secundaria=substring_index(@cnae2,',',1),telefone1_ddd = substring(@telefone1_ddd,-2),telefone2_ddd=substring(@telefone2_ddd,-2),fax_ddd=substring(@fax_ddd,-2),cnpj=concat(id_empresa,subsidiaria,codigo_verificador)"
 
 
 class OptanteSimplesCsvParser(Parser):
