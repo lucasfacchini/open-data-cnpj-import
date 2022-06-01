@@ -1,9 +1,11 @@
 import sys
 
 from parser.parsers import generate_parsers_from_files, EstabeleCsvParser
+from parser.generateImportSql import generate_sql_import_from_files
 from parser.csv_reader import CsvReader
 from parser.importer import SqlImport, MysqlImport
 from tools.log import Log
+from time import time
 
 DEFAULT_DIRECTORY = 'data/output-extract'
 
@@ -36,25 +38,30 @@ log.info('Creating schema')
 #sql.run_script('schema/mysql/drop-tables.sql')
 sql.run_script('schema/mysql/create-tables.sql')
 
+t1 = time()
 log.info('Analyzing files')
-parsers = generate_parsers_from_files(args['directory'], log)
+#parsers = generate_parsers_from_files(args['directory'], log)
+#if len(parsers) > 0:
+#    log.info('Found', len(parsers), 'files')
+#else:
+#    log.info('No files found.')
 
-if len(parsers) > 0:
-    log.info('Found', len(parsers), 'files')
-else:
-    log.info('No files found.')
-
-log.info('Truncating tables')
+#log.info('Truncating tables')
 #for parser in parsers:
 #    sql.truncate_table(parser.TABLE)
 
-count = 0
-for parser in parsers:
-    log.info('Importing file', parser.get_name(), '-', count + 1, 'of', len(parsers))
-    sql.run(parser)
-    count += 1
+#count = 0
+#for parser in parsers:
+#    log.info('Importing file', parser.get_name(), '-', count + 1, 'of', len(parsers))
+#    sql.run(parser)
+#    count += 1
 
 
-sql.run_script('schema/mysql/update-correct-data.sql')
+generate_sql_import_from_files(args['directory'], 'schema/mysql/insert-data.sql')
+sql.run_script('schema/mysql/insert-data.sql')
+
+sql.run_script('schema/mysql/rename-tables.sql')
+log.info('total time elapsed:',time()-t1)
+
 
 sql.close()

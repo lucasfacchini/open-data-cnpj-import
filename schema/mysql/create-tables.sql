@@ -9,3 +9,13 @@ CREATE TABLE IF NOT EXISTS natureza_juridica (codigo char(4), descricao varchar(
 CREATE TABLE IF NOT EXISTS qualificacao_socio (codigo char(2), descricao varchar(150), PRIMARY KEY (codigo));
 CREATE TABLE IF NOT EXISTS pais (codigo char(3), descricao varchar(60), PRIMARY KEY (codigo));
 CREATE TABLE IF NOT EXISTS motivo_situacao_cadastral (codigo char(2), descricao varchar(100), PRIMARY KEY (codigo));
+CREATE table if not exists cnae2 LIKE cnae;
+CREATE table if not exists empresa2 LIKE empresa;
+CREATE table if not exists estabelecimento2 LIKE estabelecimento;
+CREATE table if not exists motivo_situacao_cadastral2 LIKE motivo_situacao_cadastral;
+CREATE table if not exists municipio2 LIKE municipio;
+CREATE table if not exists natureza_juridica2 LIKE natureza_juridica;
+CREATE table if not exists optante_simples2 LIKE optante_simples;
+CREATE table if not exists pais2 LIKE pais;
+CREATE table if not exists qualificacao_socio2 LIKE qualificacao_socio;
+CREATE table if not exists socio2 LIKE socio;
