@@ -35,7 +35,7 @@ args = parse_args()
 log = Log()
 sql = MysqlImport(args['host'], args['port'], args['user'], args['password'], args['database'], log)
 log.info('Creating schema')
-#sql.run_script('schema/mysql/drop-tables.sql')
+sql.run_script('schema/mysql/drop-tables-others.sql')
 sql.run_script('schema/mysql/create-tables.sql')
 
 t1 = time()

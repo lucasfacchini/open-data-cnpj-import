@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS empresa2, socio2, estabelecimento2, optante_simples2, cnae2, municipio2, natureza_juridica2, qualificacao_socio2, pais2, motivo_situacao_cadastral2,empresa_old, socio_old, estabelecimento_old, optante_simples_old, cnae_old, municipio_old, natureza_juridica_old, qualificacao_socio_old, pais_old, motivo_situacao_cadastral_old;
