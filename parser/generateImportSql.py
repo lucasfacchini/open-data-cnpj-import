@@ -103,7 +103,7 @@ class MotivoSituacaoCadastralCsvParser(Parser):
 
 
 def formatSql(filename, tablename, fields, extra):
-    return "load data local infile '{}' replace into table {} character set 'latin1' fields terminated by ';' enclosed by '\"' lines terminated by '\\n' ({}) {};".format(filename, tablename, fields, extra)
+    return "load data local infile '{}' into table {} character set 'latin1' fields terminated by ';' enclosed by '\"' lines terminated by '\\n' ({}) {};".format(filename, tablename, fields, extra)
 
 def generate_sql_import_from_files(directory, sqlFile):
     parsers = [

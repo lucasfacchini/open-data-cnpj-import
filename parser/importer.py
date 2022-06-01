@@ -47,7 +47,7 @@ class MysqlImport(SqlImport):
     def run_script(self, filepath):
         for line in open(filepath):
             t1 = time()
-            self.log.info('sql:', line)
+            self.log.info('\nsql:', line)
             self.cursor.execute(line)
             self.log.info('Elasped time:',time()-t1)
         self.log.info('Ran script', filepath)
