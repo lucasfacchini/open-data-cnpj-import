@@ -1,3 +1,13 @@
+alter table cnae2 enable keys;
+alter table empresa2 enable keys;
+alter table estabelecimento2 enable keys;
+alter table motivo_situacao_cadastral2 enable keys;
+alter table municipio2 enable keys;
+alter table natureza_juridica2 enable keys;
+alter table optante_simples2 enable keys;
+alter table pais2 enable keys;
+alter table qualificacao_socio2 enable keys;
+alter table socio2 enable keys;
 drop table cnae_old;
 drop table empresa_old;
 drop table estabelecimento_old;
