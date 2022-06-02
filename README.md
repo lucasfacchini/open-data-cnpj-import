@@ -36,6 +36,12 @@ You can import the data in your existing MySQL server, but you can also start a 
 docker run --name mysql-cnpj -p 3306:3306 -h localhost -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=cnpj -d mysql
 ```
 
+in file /etc/mysql/my.cnf, enable use of command 'load data'
+
+```
+local_infile = ON
+```
+
 After starting your MySQL server, run the following, replacing with your credentials:
 
 ```
