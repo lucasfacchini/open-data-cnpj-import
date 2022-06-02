@@ -98,28 +98,31 @@ class PaisCsvParser(Parser):
 
 class MotivoSituacaoCadastralCsvParser(Parser):
     TABLE = 'motivo_situacao_cadastral2'
+    FILE_PATTERN = 'motivo_situacao_cadastral.csv'
     FIELDS = 'codigo,descricao'
     EXTRA = ''
-
+#parserMotivo = MotivoSituacaoCadastralCsvParser(CsvReader('data/motivo_situacao_cadastral.csv'))
 
 def formatSql(filename, tablename, fields, extra):
     return "load data local infile '{}' into table {} character set 'latin1' fields terminated by ';' enclosed by '\"' lines terminated by '\\n' ({}) {};".format(filename, tablename, fields, extra)
 
-def generate_sql_import_from_files(directory, sqlFile):
+def generate_sql_import_from_files(directory, sqlFile, offset, limit):
     parsers = [
+         OptanteSimplesCsvParser,
          CnpjCsvParser,
          SocioCsvParser,
          EstabeleCsvParser,
-         OptanteSimplesCsvParser,
          CnaeCsvParser,
          MunicipioCsvParser,
          NaturezaJuridicaCsvParser,
          QualSocioCsvParser,
-         PaisCsvParser
+         PaisCsvParser,
+         MotivoSituacaoCadastralCsvParser
     ]
+    parsers = parsers[offset:offset+limit]
     with open(sqlFile, 'w') as f:
-        parserMotivo = MotivoSituacaoCadastralCsvParser(CsvReader('data/motivo_situacao_cadastral.csv'))
-        f.write(formatSql('data/motivo_situacao_cadastral.csv',parserMotivo.TABLE,parserMotivo.FIELDS,parserMotivo.EXTRA)+"\n")
+
+        #f.write(formatSql('data/motivo_situacao_cadastral.csv',parserMotivo.TABLE,parserMotivo.FIELDS,parserMotivo.EXTRA)+"\n")
         for parser in parsers:
             files_from_pattern = glob.glob(directory + '/' + parser.FILE_PATTERN)
             for filepath in files_from_pattern:

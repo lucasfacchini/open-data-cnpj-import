@@ -57,7 +57,20 @@ log.info('Analyzing files')
 #    count += 1
 
 
-generate_sql_import_from_files(args['directory'], 'schema/mysql/insert-data.sql')
+generate_sql_import_from_files(args['directory'], 'schema/mysql/insert-data.sql',0,1)
+sql.run_script('schema/mysql/insert-data.sql')
+sql.close()
+sql = MysqlImport(args['host'], args['port'], args['user'], args['password'], args['database'], log)
+
+generate_sql_import_from_files(args['directory'], 'schema/mysql/insert-data.sql',1,1)
+sql.run_script('schema/mysql/insert-data.sql')
+sql.close()
+
+generate_sql_import_from_files(args['directory'], 'schema/mysql/insert-data.sql',2,1)
+sql.run_script('schema/mysql/insert-data.sql')
+sql.close()
+
+generate_sql_import_from_files(args['directory'], 'schema/mysql/insert-data.sql',3,7)
 sql.run_script('schema/mysql/insert-data.sql')
 
 sql.run_script('schema/mysql/rename-tables.sql')
