@@ -124,6 +124,6 @@ def generate_sql_import_from_files(directory, sqlFile, offset, limit):
 
         #f.write(formatSql('data/motivo_situacao_cadastral.csv',parserMotivo.TABLE,parserMotivo.FIELDS,parserMotivo.EXTRA)+"\n")
         for parser in parsers:
-            files_from_pattern = glob.glob(directory + '/' + parser.FILE_PATTERN)
+            files_from_pattern = sorted(glob.glob(directory + '/' + parser.FILE_PATTERN))
             for filepath in files_from_pattern:
                 f.write(formatSql(filepath, parser.TABLE, parser.FIELDS, parser.EXTRA) + "\n")
