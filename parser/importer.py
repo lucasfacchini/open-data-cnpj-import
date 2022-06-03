@@ -8,11 +8,12 @@ class SqlImport():
         sqlKeys = ','.join(keys)
         sqlValues = ','.join(['%s'] * len(keys))
 
-        return 'INSERT INTO ' + parser.TABLE + '(' + sqlKeys + ') VALUES (' + sqlValues + ')'
+        #return 'INSERT INTO ' + parser.TABLE + '(' + sqlKeys + ') VALUES (' + sqlValues + ')'
+        return 'REPLACE INTO ' + parser.TABLE + '(' + sqlKeys + ') VALUES (' + sqlValues + ')'
 
 
 class MysqlImport(SqlImport):
-    BATCH_SIZE = 5000
+    BATCH_SIZE = 2000
 
     def __init__(self, host, port, user, password, db, log):
         self.context = MySQLConnection(host=host, port=port, user=user, password=password, database=db)
@@ -45,8 +46,12 @@ class MysqlImport(SqlImport):
 
     def run_script(self, filepath):
         for line in open(filepath):
+            t1 = time()
+            self.log.info('\nsql:', line)
             self.cursor.execute(line)
+            self.log.info('Elasped time:',time()-t1)
         self.log.info('Ran script', filepath)
+
 
     def truncate_table(self, table):
         self.cursor.execute('TRUNCATE TABLE ' + table)
