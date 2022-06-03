@@ -7,6 +7,7 @@ if [ ! -d $DOWNLOAD_DIR ]; then
     mkdir $DOWNLOAD_DIR $EXTRACT_DIR
 fi
 
+cp data/motivo_situacao_cadastral.csv $EXTRACT_DIR
 
 if [ -z "$(ls -A $EXTRACT_DIR)" ]; then
     echo "Extracting files"
