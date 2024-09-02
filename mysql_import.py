@@ -1,8 +1,7 @@
 import sys
 
-from parser.parsers import generate_parsers_from_files, EstabeleCsvParser
-from parser.csv_reader import CsvReader
-from parser.importer import SqlImport, MysqlImport
+from parser.parsers import generate_parsers_from_files
+from parser.importer import MysqlImport
 from tools.log import Log
 
 DEFAULT_DIRECTORY = 'data/output-extract'

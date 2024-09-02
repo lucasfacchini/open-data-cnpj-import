@@ -1,4 +1,7 @@
-DOWNLOAD_URL=http://200.152.38.155/CNPJ/
+FILES_URL=http://200.152.38.155/CNPJ/dados_abertos_cnpj/
+LAST_MONTH=$(curl -s $FILES_URL | sed -n 's/.*href="\([^"]*\).*/\1/p' | awk 'END{print}')
+
+DOWNLOAD_URL=$FILES_URL$LAST_MONTH
 DOWNLOAD_DIR=data/download
 EXTRACT_DIR=data/output-extract
 

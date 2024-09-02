@@ -1,5 +1,4 @@
 import csv
-import sys
 
 DELIMITER = ';'
 ENCODING = 'ISO-8859-1'
